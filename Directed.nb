@@ -1,0 +1,27 @@
+n = 20;
+Clear A;
+Clear G;
+MatA = Table[
+   Random[Integer, {0, RandomInteger[]}], {i, 1, n}, {j, 1, n}];
+MatD = MatrixForm[UpperTriangularize[MatA]];
+AD = DiagonalMatrix[Diagonal[MatA]];
+A = MatA - AD;
+G = AdjacencyGraph[A, VertexLabels -> "Name", ImagePadding -> 10, 
+  ImageSize -> 550]
+Table[AdjacencyGraph[A, GraphLayout -> l, PlotLabel -> l, 
+  ImageSize -> 350, 
+  VertexLabels -> "Name"], {l, {"CircularEmbedding", 
+   "SpiralEmbedding"}}]
+MatrixForm[A]
+EdgeCount[G]
+EdgeList[G]
+VertexCount[G]
+VertexList[G]
+MatrixPlot[A, ImageSize -> 350]
+1.*Eigenvalues[A]
+1.*Tr[A]
+1.*Det[A]
+PA[t_] = CharacteristicPolynomial[A, t]
+Plot[PA[t], {t, -5, 5}, PlotRange -> {{-10, 10}, {-25, 25}}, 
+ ImageSize -> 550]
+ScientificForm[PA[1. Eigenvalues[A]]]
